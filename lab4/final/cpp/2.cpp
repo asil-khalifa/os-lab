@@ -1,12 +1,7 @@
-// Question 2: Mean, Median, and Mode using Threads (C++)
-#include <iostream>
-#include <vector>
-#include <thread>
-#include <algorithm>
-#include <unordered_map>
-#include <chrono>
+#include <bits/stdc++.h>
 
 using namespace std;
+using namespace std::chrono;
 
 vector<int> numbers;
 float mean;
@@ -38,7 +33,7 @@ void calculate_mode() {
     }
 
     int max_count = 0;
-    for (const auto& [key, value] : freq) {
+    for (auto& [key, value] : freq) {
         if (value > max_count) {
             max_count = value;
             mode = key;
@@ -53,6 +48,7 @@ void sequential_calculation() {
 }
 
 int main() {
+    srand(time(NULL));
     int n;
     cout << "Enter the number of elements: ";
     cin >> n;
@@ -60,28 +56,25 @@ int main() {
     numbers.resize(n);
     cout << "Enter the elements: ";
     for (int i = 0; i < n; i++) {
-        cin >> numbers[i];
+        numbers[i] = rand();
     }
 
-    // Sequential execution
-    auto start_seq = chrono::high_resolution_clock::now();
+    auto start_seq = high_resolution_clock::now();
     sequential_calculation();
-    auto end_seq = chrono::high_resolution_clock::now();
-    chrono::duration<double> seq_time = end_seq - start_seq;
+    auto end_seq = high_resolution_clock::now();
+    duration<double> seq_time = end_seq - start_seq;
 
-    // Parallel execution
     thread mean_thread(calculate_mean);
     thread median_thread(calculate_median);
     thread mode_thread(calculate_mode);
 
-    auto start_par = chrono::high_resolution_clock::now();
+    auto start_par = high_resolution_clock::now();
     mean_thread.join();
     median_thread.join();
     mode_thread.join();
-    auto end_par = chrono::high_resolution_clock::now();
-    chrono::duration<double> par_time = end_par - start_par;
+    auto end_par = high_resolution_clock::now();
+    duration<double> par_time = end_par - start_par;
 
-    // Print results
     cout << "\nSequential Execution:\n";
     cout << "Mean: " << mean << "\n";
     cout << "Median: " << median << "\n";
