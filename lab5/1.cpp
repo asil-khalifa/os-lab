@@ -11,7 +11,6 @@ void fcfs(vector<Process>& processes) {
     int current_time = 0;
 
     for (int i = 0; i < n; i++) {
-        // Process starts after arrival
         if (current_time < processes[i].arrival_time)
             current_time = processes[i].arrival_time;
 
