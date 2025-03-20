@@ -33,11 +33,10 @@ void calculate_mode() {
     }
 
     int max_count = 0;
-    for (auto& [key, value] : freq) {
-        if (value > max_count) {
+    for (auto &[key, value] : freq) {
+        if (value > max_count)
             max_count = value;
             mode = key;
-        }
     }
 }
 
