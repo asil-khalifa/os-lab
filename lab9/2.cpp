@@ -1,18 +1,23 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-#define PAGE_SIZE 4  // Define the size of a page (4 KB assumed for simplicity)
-#define MEMORY_SIZE 32 // Define total memory size (32 KB assumed)
+#define PAGE_SIZE 4  
+#define MEMORY_SIZE 32 
 
-// Paging Simulation
-void pagingSimulation() {
-    int logicalAddress, pageTable[MEMORY_SIZE / PAGE_SIZE];
-    for (int i = 0; i < MEMORY_SIZE / PAGE_SIZE; i++) {
-        pageTable[i] = i * PAGE_SIZE; // Mapping logical pages to physical frames
-    }
-    
+void paging() {
     cout << "\nPaging Simulation: " << endl;
+    
+    int logicalAddress, pageTable[MEMORY_SIZE / PAGE_SIZE];
+
+    int val = 0;
+    cout<<"Page Table generated: ";
+    for (int i = 0; i < MEMORY_SIZE / PAGE_SIZE; i++) {
+        val += rand()%4 + 1;
+        pageTable[i] = val * PAGE_SIZE; 
+        cout<<pageTable[i]<<" ";
+    }
+    cout<<endl;
+    
     cout << "Enter a logical address (0 - " << MEMORY_SIZE - 1 << "): ";
     cin >> logicalAddress;
     
@@ -29,13 +34,13 @@ void pagingSimulation() {
     cout << "Logical Address: " << logicalAddress << " => Physical Address: " << physicalAddress << endl;
 }
 
-// Segmentation Simulation
+
 struct Segment {
     int base;
     int limit;
 };
 
-void segmentationSimulation() {
+void segmentation() {
     int n, logicalAddress, segmentNumber, offset;
     
     cout << "\nSegmentation Simulation: " << endl;
@@ -61,6 +66,8 @@ void segmentationSimulation() {
 }
 
 int main() {
+    srand(time(NULL));
+
     int choice;
     do {
         cout << "\nMemory Management Techniques" << endl;
@@ -72,13 +79,13 @@ int main() {
         
         switch (choice) {
             case 1:
-                pagingSimulation();
+                paging();
                 break;
             case 2:
-                segmentationSimulation();
+                segmentation();
                 break;
             case 3:
-                cout << "Exiting..." << endl;
+                cout << "Exiting" << endl;
                 break;
             default:
                 cout << "Invalid choice!" << endl;

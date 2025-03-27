@@ -1,10 +1,10 @@
 #include <iostream>
 using namespace std;
 
-const int P = 5; // Number of processes
-const int R = 3; // Number of resources
+const int P = 5; 
+const int R = 3; 
 
-// Function to check if system is in a safe state
+
 bool isSafe(int available[], int max[][R], int allocation[][R], int need[][R]) {
     int work[R];
     bool finish[P] = {false};
@@ -48,10 +48,11 @@ bool isSafe(int available[], int max[][R], int allocation[][R], int need[][R]) {
     return true;
 }
 
+
 int main() {
     int available[R] = {3, 3, 2};
-    int max[P][R] = {{7, 5, 3}, {3, 2, 2}, {9, 0, 2}, {2, 2, 2}, {4, 3, 3}};
-    int allocation[P][R] = {{0, 1, 0}, {2, 0, 0}, {3, 0, 2}, {2, 1, 1}, {0, 0, 2}};
+    int max[P][R] = {{3, 2, 2}, {2, 2, 2}, {9, 0, 2}, {7, 5, 3}, {4, 3, 3}};
+    int allocation[P][R] = {{2, 0, 0}, {2, 1, 1}, {3, 0, 2}, {0, 1, 0}, {0, 0, 2}};
     int need[P][R];
     
     for (int i = 0; i < P; i++)
