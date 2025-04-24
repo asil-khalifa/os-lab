@@ -43,8 +43,8 @@ void server() {
 }
 
 void client(const string& request) {
-    int serverQueue = msgget(SERVER_QUEUE_KEY, 0666);
-    int clientQueue = msgget(CLIENT_QUEUE_KEY, 0666);
+    int serverQueue = msgget(SERVER_QUEUE_KEY, IPC_CREAT | 0666);
+    int clientQueue = msgget(CLIENT_QUEUE_KEY, IPC_CREAT | 0666);
     
     if (serverQueue == -1 || clientQueue == -1) {
         cerr << "Error accessing message queues." << endl;
